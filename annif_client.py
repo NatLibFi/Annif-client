@@ -17,11 +17,15 @@ class AnnifClient:
     def projects(self):
         """Get a list of projects available on the API endpoint"""
         req = requests.get(self.api_base + 'projects')
+        req.raise_for_status()
         return req.json()['projects']
 
     def get_project(self, project_id):
         """Get a single project by project ID"""
         req = requests.get(self.api_base + 'projects/{}'.format(project_id))
+        if req.status_code == 404:
+            raise ValueError, req.json()['detail']
+        req.raise_for_status()
         return req.json()
 
     def analyze(self, project_id, text, limit=None, threshold=None):
@@ -40,6 +44,9 @@ class AnnifClient:
 
         url = self.api_base + 'projects/{}/analyze'.format(project_id)
         req = requests.post(url, data=payload)
+        if req.status_code == 404:
+            raise ValueError, req.json()['detail']
+        req.raise_for_status()
         return req.json()['results']
 
     def __str__(self):
