@@ -25,10 +25,14 @@ In your own code, you can import the AnnifClient class like this:
 
     from annif_client import AnnifClient
 
+    # then you can create your own client
+    annif = AnnifClient()
+
 ## Example invocation
 
-Here is the output from a typical session:
+Here is the output from a typical examploe session:
 
+    $ python3 annif_client.py
     Demonstrating usage of AnnifClient
 
     * Creating an AnnifClient object
