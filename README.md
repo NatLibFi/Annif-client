@@ -21,7 +21,11 @@ or in some cases (e.g. Ubuntu systems with both Python 2 and 3):
 The client library comes with examples demonstrating its usage. You can invoke
 the example simply by running the [annif_client.py](annif_client.py) script.
 
-In your own code, you can import the AnnifClient class like this:
+You can install the annif_client module globally like this:
+
+    python3 setup.py install
+
+In your own code, you can then import the AnnifClient class like this:
 
     from annif_client import AnnifClient
 
