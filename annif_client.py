@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Module for accessing Annif REST API in a Pythonic way"""
+"""Module for accessing Annif REST API"""
 
 import requests
 
@@ -8,7 +8,7 @@ API_BASE = 'http://dev.annif.org/v1/'
 
 
 class AnnifClient:
-    """Client class for accessing Annif REST API in a Pythonic way"""
+    """Client class for accessing Annif REST API"""
 
     def __init__(self, api_base=API_BASE):
         self.api_base = api_base
