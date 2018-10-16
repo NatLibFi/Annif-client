@@ -1,8 +1,8 @@
 # Annif-client
 
-This is a minimal Python 3.x client library for accessing the Annif REST API
-which can be used for automated subject indexing and classification of text
-documents.
+This is a minimal Python 3.x client library for accessing the
+[Annif](http://annif.org) REST API which can be used for automated subject
+indexing and classification of text documents.
 
 ## Dependencies
 
