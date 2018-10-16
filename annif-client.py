@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Module for accessing Annif REST API in a Pythonic way"""
 
 import requests
 
@@ -14,14 +15,18 @@ class AnnifClient:
 
     @property
     def projects(self):
+        """Get a list of projects available on the API endpoint"""
         req = requests.get(self.api_base + 'projects')
         return req.json()['projects']
 
     def get_project(self, project_id):
+        """Get a single project by project ID"""
         req = requests.get(self.api_base + 'projects/{}'.format(project_id))
         return req.json()
 
     def analyze(self, project_id, text, limit=None, threshold=None):
+        """Analyze text (either a string or a file-like object) using a specified
+        project and optional limit and/or threshold settings."""
         if not isinstance(text, str):
             text = text.read()
 
@@ -38,6 +43,7 @@ class AnnifClient:
         return req.json()['results']
 
     def __str__(self):
+        """Return a string representation of this object"""
         return "AnnifClient(api_base='{}')".format(self.api_base)
 
 
@@ -75,7 +81,8 @@ if __name__ == '__main__':
 
     print("* Analyzing a longer text from a file, with a limit on number of results")
     with open('LICENSE') as license_file:
-        results = annif.analyze(project_id='yso-en', text=license_file, limit=5)
+        results = annif.analyze(project_id='yso-en',
+                                text=license_file, limit=5)
         for result in results:
             print("<{}>\t{:.4f}\t{}".format(
                 result['uri'], result['score'], result['label']))
