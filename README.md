@@ -34,7 +34,7 @@ In your own code, you can then import the AnnifClient class like this:
 
 ## Example invocation
 
-Here is the output from a typical examploe session:
+Here is the output from a typical example session:
 
     $ python3 annif_client.py
     Demonstrating usage of AnnifClient
