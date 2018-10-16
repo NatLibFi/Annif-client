@@ -19,7 +19,7 @@ or in some cases (e.g. Ubuntu systems with both Python 2 and 3):
 ## How to use
 
 The client library comes with examples demonstrating its usage. You can invoke
-the example simply by running the [annif_client.py](annif-client.py) script.
+the example simply by running the [annif_client.py](annif_client.py) script.
 
 In your own code, you can import the AnnifClient class like this:
 
