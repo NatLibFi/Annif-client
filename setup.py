@@ -14,6 +14,7 @@ setup(
     author_email='osma.suominen@helsinki.fi',
     description='Python client library for accessing Annif REST API',
     long_description=read('README.md'),
+    long_description_content_type='text/markdown',
     py_modules=['annif_client'],
     install_requires=['requests'],
     extras_require={
