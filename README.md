@@ -84,5 +84,5 @@ Here is the output from a typical example session:
 
 ## License
 
-The code is published under the [CC0](LICENSE) license. You can do whatever
+The code is published under the [CC0](LICENSE.txt) license. You can do whatever
 you want with it.
