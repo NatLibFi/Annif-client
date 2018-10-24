@@ -7,7 +7,7 @@ def read(fname):
 
 
 setup(
-    name='annif_client',
+    name='annif-client',
     version='0.2.3',
     url='https://github.com/NatLibFi/Annif-client',
     author='Osma Suominen',
