@@ -4,7 +4,7 @@
 import requests
 
 # Default API base URL
-API_BASE = 'http://dev.annif.org/v1/'
+API_BASE = 'http://api.annif.org/v1/'
 
 
 class AnnifClient:
