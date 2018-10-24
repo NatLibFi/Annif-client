@@ -87,7 +87,7 @@ if __name__ == '__main__':
     print()
 
     print("* Analyzing a longer text from a file, with a limit on number of results")
-    with open('LICENSE') as license_file:
+    with open('LICENSE.txt') as license_file:
         results = annif.analyze(project_id='yso-en',
                                 text=license_file, limit=5)
         for result in results:
