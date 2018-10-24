@@ -4,28 +4,25 @@ This is a minimal Python 3.x client library for accessing the
 [Annif](http://annif.org) REST API which can be used for automated subject
 indexing and classification of text documents.
 
+## Installation
+
+The easiest way to install is via pip:
+
+    pip3 install annif-client
+
 ## Dependencies
 
 The library depends on the
 [requests](http://docs.python-requests.org/en/master/#) module which is used
-for HTTP/REST access. The easiest way to install requests is via pip:
-
-    pip install requests
-
-or in some cases (e.g. Ubuntu systems with both Python 2 and 3):
-
-    pip3 install requests
+for HTTP/REST access. If you install this via pip, the dependencies will be
+handled automatically.
 
 ## How to use
 
 The client library comes with examples demonstrating its usage. You can invoke
-the example simply by running the [annif_client.py](annif_client.py) script.
+the example by running the [annif_client.py](annif_client.py) script.
 
-You can install the annif_client module globally like this:
-
-    python3 setup.py install
-
-In your own code, you can then import the AnnifClient class like this:
+In your own code, you can use the AnnifClient class like this:
 
     from annif_client import AnnifClient
 
