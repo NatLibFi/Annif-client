@@ -40,7 +40,7 @@ Here is the output from a typical example session:
     Demonstrating usage of AnnifClient
 
     * Creating an AnnifClient object
-    Now we have an AnnifClient object: AnnifClient(api_base='http://dev.annif.org/v1/')
+    Now we have an AnnifClient object: AnnifClient(api_base='http://api.annif.org/v1/')
 
     * Finding the available projects
     Project id: yso-fi           lang: fi  name: YSO ensemble Finnish
@@ -76,13 +76,12 @@ Here is the output from a typical example session:
     <http://www.yso.fi/onto/yso/p28336>	0.0911	animal training
 
     * Analyzing a longer text from a file, with a limit on number of results
-    <http://www.yso.fi/onto/yso/p11910>	0.2918	related rights
-    <http://www.yso.fi/onto/yso/p152>	0.1810	rights
-    <http://www.yso.fi/onto/yso/p1810>	0.1621	work
-    <http://www.yso.fi/onto/yso/p2346>	0.1589	copyright
-    <http://www.yso.fi/onto/yso/p15650>	0.1526	Works
+    <http://www.yso.fi/onto/yso/p16495>	0.3651	licences (permits)
+    <http://www.yso.fi/onto/yso/p2346>	0.1656	copyright
+    <http://www.yso.fi/onto/yso/p11657>	0.1566	national libraries
+    <http://www.yso.fi/onto/yso/p6068>	0.1461	Apache
+    <http://www.yso.fi/onto/yso/p14833>	0.1220	copies
 
 ## License
 
-The code is published under the [CC0](LICENSE.txt) license. You can do whatever
-you want with it.
+The code is published under the [Apache 2.0](LICENSE.txt) license.
