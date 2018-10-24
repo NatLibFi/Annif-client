@@ -19,4 +19,10 @@ setup(
     install_requires=['requests'],
     extras_require={
         'dev': ['bumpversion']
-    })
+    },
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: Apache Software License",
+        "Operating System :: OS Independent",
+    ]
+)
