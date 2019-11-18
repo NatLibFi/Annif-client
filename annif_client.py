@@ -50,6 +50,16 @@ class AnnifClient:
         req.raise_for_status()
         return req.json()['results']
 
+    def learn(self, project_id, documents):
+        """Further train an existing project on a text with given subjects."""
+
+        url = self.api_base + 'projects/{}/learn'.format(project_id)
+        req = requests.post(url, json=documents)
+        if req.status_code == 404:
+            raise ValueError(req.json()['detail'])
+        req.raise_for_status()
+        return req
+
     analyze = suggest  # Alias for backwards compatibility
 
     def __str__(self):
@@ -96,3 +106,16 @@ if __name__ == '__main__':
         for result in results:
             print("<{}>\t{:.4f}\t{}".format(
                 result['uri'], result['score'], result['label']))
+
+    print()
+
+    print("* Learning on a document")
+    documents = [
+        {"subjects":
+            [{"uri": "http://example.org/fox", "label": "fox"}],
+        "text":
+            "the quick brown fox"
+        }
+    ]
+    req = annif.learn(project_id='dummy-en', documents=documents)
+    print(req)
