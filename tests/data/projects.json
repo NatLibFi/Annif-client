@@ -1,0 +1,20 @@
+{
+  "projects": [
+    {
+      "backend": {
+        "backend_id": "dummy"
+      },
+      "language": "fi",
+      "name": "Dummy Finnish",
+      "project_id": "dummy-fi"
+    },
+    {
+      "backend": {
+        "backend_id": "dummy"
+      },
+      "language": "en",
+      "name": "Dummy English",
+      "project_id": "dummy-en"
+    }
+  ]
+}

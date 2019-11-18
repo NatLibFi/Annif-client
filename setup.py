@@ -18,7 +18,7 @@ setup(
     py_modules=['annif_client'],
     install_requires=['requests'],
     extras_require={
-        'dev': ['bumpversion']
+        'dev': ['bumpversion','pytest','responses']
     },
     classifiers=[
         "Programming Language :: Python :: 3",
