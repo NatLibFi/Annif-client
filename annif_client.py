@@ -28,9 +28,10 @@ class AnnifClient:
         req.raise_for_status()
         return req.json()
 
-    def analyze(self, project_id, text, limit=None, threshold=None):
-        """Analyze text (either a string or a file-like object) using a specified
-        project and optional limit and/or threshold settings."""
+    def suggest(self, project_id, text, limit=None, threshold=None):
+        """Suggest subjects for a text (either a string or a file-like object)
+        using a specified project and optional limit and/or threshold settings.
+        """
         if not isinstance(text, str):
             text = text.read()
 
@@ -42,7 +43,7 @@ class AnnifClient:
         if threshold is not None:
             payload['threshold'] = threshold
 
-        url = self.api_base + 'projects/{}/analyze'.format(project_id)
+        url = self.api_base + 'projects/{}/suggest'.format(project_id)
         req = requests.post(url, data=payload)
         if req.status_code == 404:
             raise ValueError(req.json()['detail'])
@@ -58,6 +59,8 @@ class AnnifClient:
             raise ValueError(req.json()['detail'])
         req.raise_for_status()
         return req
+
+    analyze = suggest  # Alias for backwards compatibility
 
     def __str__(self):
         """Return a string representation of this object"""
@@ -88,7 +91,7 @@ if __name__ == '__main__':
     print()
 
     print("* Analyzing a short text from a string")
-    results = annif.analyze(project_id='yso-en',
+    results = annif.suggest(project_id='yso-en',
                             text='The quick brown fox jumped over the lazy dog')
     for result in results:
         print("<{}>\t{:.4f}\t{}".format(
@@ -98,7 +101,7 @@ if __name__ == '__main__':
 
     print("* Analyzing a longer text from a file, with a limit on number of results")
     with open('LICENSE.txt') as license_file:
-        results = annif.analyze(project_id='yso-en',
+        results = annif.suggest(project_id='yso-en',
                                 text=license_file, limit=5)
         for result in results:
             print("<{}>\t{:.4f}\t{}".format(
