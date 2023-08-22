@@ -3,15 +3,15 @@ name: Python package
 on: [push, pull_request]
 jobs:
   test-job:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install
@@ -24,12 +24,12 @@ jobs:
 
   build-and-publish-job:
     needs: test-job
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.8'
     - name: Build distribution
@@ -37,7 +37,7 @@ jobs:
         python -m pip install wheel
         python setup.py sdist bdist_wheel
     - name: Publish distribution
-      uses: pypa/gh-action-pypi-publish@release/v1.4
+      uses: pypa/gh-action-pypi-publish@release/v1.8
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
