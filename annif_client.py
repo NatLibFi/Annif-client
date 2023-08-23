@@ -14,6 +14,13 @@ class AnnifClient:
         self.api_base = api_base
 
     @property
+    def api_info(self):
+        """Get basic information of the API endpoint"""
+        req = requests.get(self.api_base)
+        req.raise_for_status()
+        return req.json()
+
+    @property
     def projects(self):
         """Get a list of projects available on the API endpoint"""
         req = requests.get(self.api_base + 'projects')
@@ -74,7 +81,8 @@ if __name__ == '__main__':
 
     print("* Creating an AnnifClient object")
     annif = AnnifClient()
-    print("Now we have an AnnifClient object:", annif)
+    print(f"* The client uses Annif API at {annif.api_base}")
+    print(f"* The version of Annif serving the API is {annif.api_info['version']}")
     print()
     print("* Finding the available projects")
     for project in annif.projects:

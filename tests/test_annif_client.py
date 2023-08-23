@@ -24,6 +24,17 @@ def test_create_client_api_base():
 
 
 @responses.activate
+def test_api_info(client):
+    datafile = os.path.join(os.path.dirname(__file__), 'data/api-info.json')
+    responses.add(responses.GET,
+                  'https://api.annif.org/v1/',
+                  body=open(datafile).read())
+    result = client.api_info
+    assert result['title'] == 'Annif REST API'
+    assert result['version'] == '0.12.3'
+
+
+@responses.activate
 def test_projects(client):
     datafile = os.path.join(os.path.dirname(__file__), 'data/projects.json')
     responses.add(responses.GET,
