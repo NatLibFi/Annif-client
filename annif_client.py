@@ -106,16 +106,3 @@ if __name__ == '__main__':
         for result in results:
             print("<{}>\t{:.4f}\t{}".format(
                 result['uri'], result['score'], result['label']))
-
-    print()
-
-    print("* Learning on a document")
-    documents = [
-        {"subjects":
-            [{"uri": "http://example.org/fox", "label": "fox"}],
-        "text":
-            "the quick brown fox"
-        }
-    ]
-    req = annif.learn(project_id='dummy-en', documents=documents)
-    print(req)
