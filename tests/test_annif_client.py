@@ -4,6 +4,9 @@ from annif_client import AnnifClient, API_BASE
 import os.path
 import pytest
 import responses
+import requests
+import importlib
+import unittest
 
 
 @pytest.fixture(scope='module')
@@ -42,3 +45,13 @@ def test_projects(client):
                   body=open(datafile).read())
     result = client.projects
     assert len(result) == 2
+
+
+def test_headers(client):
+    with unittest.mock.patch("requests.get"):
+        client.api_info
+
+        version = importlib.metadata.version("annif-client")
+        assert requests.get.call_args.kwargs["headers"] == {
+            "User-Agent": f"Annif-client/{version}"
+        }
