@@ -27,7 +27,7 @@ def test_create_client_api_base():
 def test_projects(client):
     datafile = os.path.join(os.path.dirname(__file__), 'data/projects.json')
     responses.add(responses.GET,
-                  'http://api.annif.org/v1/projects',
+                  'https://api.annif.org/v1/projects',
                   body=open(datafile).read())
     result = client.projects
     assert len(result) == 2
