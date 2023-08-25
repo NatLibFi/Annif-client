@@ -57,6 +57,28 @@ class AnnifClient:
         req.raise_for_status()
         return req.json()['results']
 
+    def suggest_batch(self, project_id, documents, limit=None, threshold=None):
+        """Suggest subjects for a batch of text documents (a list of
+        dictionaries; each dictionary contains a text and optionally an
+        identifier string for the document). The specified project is used with
+        the optional limit and/or threshold settings.
+        """
+
+        payload = {'documents': documents}
+        params = {}
+        if limit is not None:
+            params['limit'] = limit
+
+        if threshold is not None:
+            params['threshold'] = threshold
+
+        url = self.api_base + 'projects/{}/suggest-batch'.format(project_id)
+        req = requests.post(url, json=payload, params=params)
+        if req.status_code == 404:
+            raise ValueError(req.json()['detail'])
+        req.raise_for_status()
+        return req.json()
+
     def learn(self, project_id, documents):
         """Further train an existing project on a text with given subjects."""
 
@@ -112,5 +134,27 @@ if __name__ == '__main__':
         results = annif.suggest(project_id='yso-en',
                                 text=license_file, limit=5)
         for result in results:
+            print("<{}>\t{:.4f}\t{}".format(
+                result['uri'], result['score'], result['label']))
+
+    print()
+
+    print("* Analyzing a batch of text documents")
+    documents = [
+        {"document_id":
+            "doc-0",
+         "text":
+            "The quick brown fox jumped over the lazy dog"},
+        {"document_id":
+            "doc-1",
+        "text":
+            "The National Library of Finland is the "
+            "oldest scholarly library in Finland."}
+    ]
+    results = annif.suggest_batch(project_id='yso-en',
+                                  documents=documents)
+    for document in results:
+        print(document['document_id'])
+        for result in document["results"]:
             print("<{}>\t{:.4f}\t{}".format(
                 result['uri'], result['score'], result['label']))
