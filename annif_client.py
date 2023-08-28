@@ -2,7 +2,7 @@
 """Module for accessing Annif REST API"""
 
 import requests
-import importlib
+from importlib import metadata
 
 
 # Default API base URL
@@ -14,7 +14,7 @@ class AnnifClient:
 
     def __init__(self, api_base=API_BASE):
         self.api_base = api_base
-        version = importlib.metadata.version("annif-client")
+        version = metadata.version("annif-client")
         self._headers = {
             "User-Agent": f"Annif-client/{version}",
         }
