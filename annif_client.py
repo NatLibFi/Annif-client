@@ -2,6 +2,8 @@
 """Module for accessing Annif REST API"""
 
 import requests
+from importlib import metadata
+
 
 # Default API base URL
 API_BASE = 'https://api.annif.org/v1/'
@@ -12,24 +14,31 @@ class AnnifClient:
 
     def __init__(self, api_base=API_BASE):
         self.api_base = api_base
+        version = metadata.version("annif-client")
+        self._headers = {
+            "User-Agent": f"Annif-client/{version}",
+        }
 
     @property
     def api_info(self):
         """Get basic information of the API endpoint"""
-        req = requests.get(self.api_base)
+        req = requests.get(self.api_base, headers=self._headers)
         req.raise_for_status()
         return req.json()
 
     @property
     def projects(self):
         """Get a list of projects available on the API endpoint"""
-        req = requests.get(self.api_base + 'projects')
+        req = requests.get(self.api_base + 'projects', headers=self._headers)
         req.raise_for_status()
         return req.json()['projects']
 
     def get_project(self, project_id):
         """Get a single project by project ID"""
-        req = requests.get(self.api_base + 'projects/{}'.format(project_id))
+        req = requests.get(
+            self.api_base + 'projects/{}'.format(project_id),
+            headers=self._headers
+        )
         if req.status_code == 404:
             raise ValueError(req.json()['detail'])
         req.raise_for_status()
@@ -51,7 +60,7 @@ class AnnifClient:
             payload['threshold'] = threshold
 
         url = self.api_base + 'projects/{}/suggest'.format(project_id)
-        req = requests.post(url, data=payload)
+        req = requests.post(url, data=payload, headers=self._headers)
         if req.status_code == 404:
             raise ValueError(req.json()['detail'])
         req.raise_for_status()
@@ -73,7 +82,8 @@ class AnnifClient:
             params['threshold'] = threshold
 
         url = self.api_base + 'projects/{}/suggest-batch'.format(project_id)
-        req = requests.post(url, json=payload, params=params)
+        req = requests.post(
+            url, json=payload, params=params, headers=self._headers)
         if req.status_code == 404:
             raise ValueError(req.json()['detail'])
         req.raise_for_status()
@@ -83,7 +93,7 @@ class AnnifClient:
         """Further train an existing project on a text with given subjects."""
 
         url = self.api_base + 'projects/{}/learn'.format(project_id)
-        req = requests.post(url, json=documents)
+        req = requests.post(url, json=documents, headers=self._headers)
         if req.status_code == 404:
             raise ValueError(req.json()['detail'])
         req.raise_for_status()
