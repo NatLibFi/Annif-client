@@ -159,7 +159,12 @@ if __name__ == '__main__':
             "doc-1",
         "text":
             "The National Library of Finland is the "
-            "oldest scholarly library in Finland."}
+            "oldest scholarly library in Finland."},
+        {"document_id":
+            "doc-2",
+        "text":
+            "Annif is a multi-algorithm automated subject indexing "
+            "tool for libraries, archives and museums."},
     ]
     results = annif.suggest_batch(project_id='yso-en',
                                   documents=documents)

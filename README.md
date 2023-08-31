@@ -32,14 +32,14 @@ In your own code, you can use the AnnifClient class like this:
 ## Example invocation
 
 Here is the output from a typical example session:
-    
+
     $ python3 annif_client.py
     Demonstrating usage of AnnifClient
-    
+
     * Creating an AnnifClient object
     * The client uses Annif API at https://api.annif.org/v1/
     * The version of Annif serving the API is 0.61.0
-    
+
     * Finding the available projects
     Project id: yso-fi           lang: fi  name: YSO NN ensemble Finnish
     Project id: yso-sv           lang: sv  name: YSO NN ensemble Swedish
@@ -53,10 +53,10 @@ Here is the output from a typical example session:
     Project id: yso-fasttext-fi  lang: fi  name: YSO fastText Finnish
     Project id: yso-fasttext-sv  lang: sv  name: YSO fastText Swedish
     Project id: yso-fasttext-en  lang: en  name: YSO fastText English
-    
+
     * Looking up information about a specific project
     Project id: yso-en           lang: en  name: YSO NN ensemble English
-    
+
     * Analyzing a short text from a string
     <http://www.yso.fi/onto/yso/p5319>	0.2852	dog
     <http://www.yso.fi/onto/yso/p8122>	0.1401	laziness
@@ -68,14 +68,14 @@ Here is the output from a typical example session:
     <http://www.yso.fi/onto/yso/p2023>	0.0584	animals
     <http://www.yso.fi/onto/yso/p4484>	0.0453	jazz
     <http://www.yso.fi/onto/yso/p22993>	0.0357	clicker training
-    
+
     * Analyzing a longer text from a file, with a limit on number of results
     <http://www.yso.fi/onto/yso/p2346>	0.6324	copyright
     <http://www.yso.fi/onto/yso/p16495>	0.4211	licences (permits)
     <http://www.yso.fi/onto/yso/p26592>	0.1882	computer programmes
     <http://www.yso.fi/onto/yso/p3069>	0.1434	patents
     <http://www.yso.fi/onto/yso/p3068>	0.1044	intellectual property law
-    
+
     * Analyzing a batch of text documents
     doc-0
     <http://www.yso.fi/onto/yso/p5319>	0.2852	dog
@@ -99,6 +99,17 @@ Here is the output from a typical example session:
     <http://www.yso.fi/onto/yso/p19136>	0.2577	scientific libraries
     <http://www.yso.fi/onto/yso/p1778>	0.2208	histories (literary works)
     <http://www.yso.fi/onto/yso/p10184>	0.2120	university libraries
+    doc-2
+    <http://www.yso.fi/onto/yso/p4934>	0.5751	museums
+    <http://www.yso.fi/onto/yso/p2787>	0.5510	libraries
+    <http://www.yso.fi/onto/yso/p2336>	0.4488	archives (memory organisations)
+    <http://www.yso.fi/onto/yso/p26984>	0.4123	subject indexing
+    <http://www.yso.fi/onto/yso/p11477>	0.2768	automation
+    <http://www.yso.fi/onto/yso/p13380>	0.2394	subject cataloging
+    <http://www.yso.fi/onto/yso/p39257>	0.1884	indexing (information technology)
+    <http://www.yso.fi/onto/yso/p1140>	0.0799	data storage
+    <http://www.yso.fi/onto/yso/p5521>	0.0771	information management
+    <http://www.yso.fi/onto/yso/p21192>	0.0749	long-term preservation
 
 ## License
 
