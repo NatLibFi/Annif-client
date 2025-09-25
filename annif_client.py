@@ -41,13 +41,9 @@ class AnnifClient:
         if not isinstance(text, str):
             text = text.read()
 
-        payload = {'text': text}
-        if languages is not None:
-            payload['languages'] = languages
+        payload = {'text': text, 'languages': languages}
         url = self.api_base + 'detect-language'
-        headers = self._headers.copy()
-        headers['Content-Type'] = 'application/json'
-        req = requests.post(url, json=payload, headers=headers)
+        req = requests.post(url, json=payload, headers=self._headers)
         if req.status_code == 404:
             raise ValueError(req.json().get('detail', 'Not found'))
         req.raise_for_status()
