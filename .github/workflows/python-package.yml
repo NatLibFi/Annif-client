@@ -26,6 +26,11 @@ jobs:
     needs: test-job
     runs-on: ubuntu-24.04
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    environment:
+      name: pypi
+      url: https://pypi.org/project/annif-client/
+    permissions:
+      id-token: write
     steps:
     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
     - name: Set up Python 3.13
