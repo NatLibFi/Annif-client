@@ -63,9 +63,18 @@ def test_detect_language(client):
     responses.add(
         responses.POST,
         'https://api.annif.org/v1/detect-language',
-        json={"language": "en", "languages": [{"language": "en", "score": 0.99}]},
+        json={
+            "results": [
+                {
+                    "language": "en",
+                    "score": 0.99
+                }
+            ]
+        },
         status=200
     )
-    result = client.detect_language("This is a test sentence.")
-    assert result["language"] == "en"
-    assert isinstance(result["languages"], list)
+    result = client.detect_language(
+        "This is a test sentence.", languages=['en', 'fi'])
+    assert isinstance(result["results"], list)
+    assert result["results"][0]["language"] == "en"
+    assert result["results"][0]["score"] == 0.99

@@ -33,7 +33,7 @@ class AnnifClient:
         req.raise_for_status()
         return req.json()['projects']
 
-    def detect_language(self, text, languages=None):
+    def detect_language(self, text, languages):
         """Detect the language of the given text using the Annif REST API.
         :param text: The text to analyze (str or file-like object)
         :param languages: List of candidate language codes (e.g., ['en', 'fi'])
