@@ -133,20 +133,20 @@ if __name__ == '__main__':
     print(f"* The version of Annif serving the API is {annif.api_info['version']}")
 
     print()
-    print("* Detecting language of a short text (candidates: en, fi, sv)")
+    print(
+        "* Detecting the language of text: "
+        "'The quick brown fox jumped over the lazy dog' "
+        "(candidates: en, fi, sv)"
+    )
     lang_result = annif.detect_language(
         'The quick brown fox jumped over the lazy dog',
         languages=['en', 'fi', 'sv']
     )
-    print(f"Full response: {lang_result}")
-    if 'results' in lang_result and lang_result['results']:
-        top = lang_result['results'][0]
-        print(f"Detected language: {top['language']} (score: {top['score']})")
-        print("All detected languages and scores:")
-        for res in lang_result['results']:
-            print(f"  {res['language']}: {res['score']}")
-    else:
-        print("No language detection results in response. Check API response above for details.")
+    for res in lang_result['results']:
+        print(
+            f"Language: {str(res['language']):<6}score: {res['score']}"
+    )
+
     print()
     print("* Finding the available projects")
     for project in annif.projects:
