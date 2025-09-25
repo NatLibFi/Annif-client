@@ -38,7 +38,13 @@ Here is the output from a typical example session:
 
     * Creating an AnnifClient object
     * The client uses Annif API at https://api.annif.org/v1/
-    * The version of Annif serving the API is 0.61.0
+    * The version of Annif serving the API is 1.4.0
+
+    * Detecting the language of text: 'The quick brown fox jumped over the lazy dog' (candidates: en, fi, sv)
+    Language: en    score: 1.0
+    Language: sv    score: 0.25
+    Language: fi    score: 0.0
+    Language: None  score: 0.0
 
     * Finding the available projects
     Project id: yso-fi           lang: fi  name: YSO NN ensemble Finnish

@@ -33,6 +33,22 @@ class AnnifClient:
         req.raise_for_status()
         return req.json()['projects']
 
+    def detect_language(self, text, languages):
+        """Detect the language of the given text using the Annif REST API.
+        :param text: The text to analyze (str or file-like object)
+        :param languages: List of candidate language codes (e.g., ['en', 'fi'])
+        """
+        if not isinstance(text, str):
+            text = text.read()
+
+        payload = {'text': text, 'languages': languages}
+        url = self.api_base + 'detect-language'
+        req = requests.post(url, json=payload, headers=self._headers)
+        if req.status_code == 404:
+            raise ValueError(req.json().get('detail', 'Not found'))
+        req.raise_for_status()
+        return req.json()
+
     def get_project(self, project_id):
         """Get a single project by project ID"""
         req = requests.get(
@@ -115,6 +131,22 @@ if __name__ == '__main__':
     annif = AnnifClient()
     print(f"* The client uses Annif API at {annif.api_base}")
     print(f"* The version of Annif serving the API is {annif.api_info['version']}")
+
+    print()
+    print(
+        "* Detecting the language of text: "
+        "'The quick brown fox jumped over the lazy dog' "
+        "(candidates: en, fi, sv)"
+    )
+    lang_result = annif.detect_language(
+        'The quick brown fox jumped over the lazy dog',
+        languages=['en', 'fi', 'sv']
+    )
+    for res in lang_result['results']:
+        print(
+            f"Language: {str(res['language']):<6}score: {res['score']}"
+    )
+
     print()
     print("* Finding the available projects")
     for project in annif.projects:

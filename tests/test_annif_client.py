@@ -55,3 +55,26 @@ def test_headers(client):
         assert requests.get.call_args.kwargs["headers"] == {
             "User-Agent": f"Annif-client/{version}"
         }
+
+
+@responses.activate
+def test_detect_language(client):
+    # Mocked response for language detection
+    responses.add(
+        responses.POST,
+        'https://api.annif.org/v1/detect-language',
+        json={
+            "results": [
+                {
+                    "language": "en",
+                    "score": 0.99
+                }
+            ]
+        },
+        status=200
+    )
+    result = client.detect_language(
+        "This is a test sentence.", languages=['en', 'fi'])
+    assert isinstance(result["results"], list)
+    assert result["results"][0]["language"] == "en"
+    assert result["results"][0]["score"] == 0.99
