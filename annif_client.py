@@ -10,6 +10,18 @@ API_BASE = 'https://api.annif.org/v1/'
 
 
 class AnnifClient:
+    def detect_language(self, text):
+        """Detect the language of the given text using the Annif REST API."""
+        if not isinstance(text, str):
+            text = text.read()
+
+        payload = {'text': text}
+        url = self.api_base + 'detect-language'
+        req = requests.post(url, data=payload, headers=self._headers)
+        if req.status_code == 404:
+            raise ValueError(req.json().get('detail', 'Not found'))
+        req.raise_for_status()
+        return req.json()
     """Client class for accessing Annif REST API"""
 
     def __init__(self, api_base=API_BASE):

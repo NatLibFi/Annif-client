@@ -50,8 +50,35 @@ def test_projects(client):
 def test_headers(client):
     with unittest.mock.patch("requests.get"):
         client.api_info
-
         version = importlib.metadata.version("annif-client")
         assert requests.get.call_args.kwargs["headers"] == {
             "User-Agent": f"Annif-client/{version}"
         }
+
+
+@responses.activate
+def test_detect_language(client):
+    # Mocked response for language detection
+    responses.add(
+        responses.POST,
+        'https://api.annif.org/v1/detect-language',
+        json={"language": "en", "languages": [{"language": "en", "score": 0.99}]},
+        status=200
+    )
+    result = client.detect_language("This is a test sentence.")
+    assert result["language"] == "en"
+    assert isinstance(result["languages"], list)
+
+
+@responses.activate
+def test_detect_language(client):
+    # Mocked response for language detection
+    responses.add(
+        responses.POST,
+        'https://api.annif.org/v1/detect-language',
+        json={"language": "en", "languages": [{"language": "en", "score": 0.99}]},
+        status=200
+    )
+    result = client.detect_language("This is a test sentence.")
+    assert result["language"] == "en"
+    assert isinstance(result["languages"], list)
